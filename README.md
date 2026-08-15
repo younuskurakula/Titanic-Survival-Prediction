@@ -53,8 +53,7 @@ Titanic-Survival-Prediction/
 ├── train.csv
 ├── test.csv
 ├── notebook.ipynb
-├── README.md
-└── requirements.txt
+└── README.md
 ```
 
 ## 🚀 Key Learning
