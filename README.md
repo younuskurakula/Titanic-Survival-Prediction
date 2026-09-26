@@ -6,6 +6,13 @@ The project predicts whether a passenger survived the Titanic disaster using pas
 
 The project was developed from **data preprocessing and model training to model evaluation, API development, automated testing, Docker containerization, and cloud deployment**.
 
+
+Live Demo: https://titanic-survival-api-2285.onrender.com/
+
+GitHub: https://github.com/younuskurakula/Titanic-Survival-Prediction.git
+
+API Docs: https://titanic-survival-api-2285.onrender.com/docs
+
 ---
 
 ## 🎯 Objective
