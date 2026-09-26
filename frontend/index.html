@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Titanic Survival Prediction</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Titanic Survival Prediction</h1>
+
+    <form id="predictionForm">
+
+        <div class="form-group">
+            <label>Passenger Class</label>
+
+            <select id="Pclass">
+                <option value="1">1st Class</option>
+                <option value="2">2nd Class</option>
+                <option value="3">3rd Class</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label>Sex</label>
+
+            <select id="Sex">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label>Age</label>
+
+            <input
+                type="number"
+                id="Age"
+                value="25"
+                step="0.1"
+            >
+        </div>
+
+
+        <div class="form-group">
+            <label>Siblings / Spouses</label>
+
+            <input
+                type="number"
+                id="SibSp"
+                value="0"
+                min="0"
+            >
+        </div>
+
+
+        <div class="form-group">
+            <label>Parents / Children</label>
+
+            <input
+                type="number"
+                id="Parch"
+                value="0"
+                min="0"
+            >
+        </div>
+
+
+        <div class="form-group">
+            <label>Fare</label>
+
+            <input
+                type="number"
+                id="Fare"
+                value="100"
+                step="0.01"
+            >
+        </div>
+
+
+        <div class="form-group">
+            <label>Embarked</label>
+
+            <select id="Embarked">
+                <option value="C">Cherbourg</option>
+                <option value="S">Southampton</option>
+                <option value="Q">Queenstown</option>
+            </select>
+        </div>
+
+
+        <button type="submit">
+            Predict Survival
+        </button>
+
+    </form>
+
+
+    <div id="result"></div>
+
+
+    <script>
+
+        const form = document.getElementById(
+            "predictionForm"
+        );
+
+        const resultBox = document.getElementById(
+            "result"
+        );
+
+
+        form.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const passenger = {
+
+                    Pclass: Number(
+                        document.getElementById("Pclass").value
+                    ),
+
+                    Sex: document.getElementById("Sex").value,
+
+                    Age: Number(
+                        document.getElementById("Age").value
+                    ),
+
+                    SibSp: Number(
+                        document.getElementById("SibSp").value
+                    ),
+
+                    Parch: Number(
+                        document.getElementById("Parch").value
+                    ),
+
+                    Fare: Number(
+                        document.getElementById("Fare").value
+                    ),
+
+                    Embarked:
+                        document.getElementById("Embarked").value
+                };
+
+
+                try {
+
+                    const response = await fetch(
+                        "/predict",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify(
+                                passenger
+                            )
+                        }
+                    );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.detail || "Prediction failed"
+                        );
+
+                    }
+
+
+                    resultBox.style.display =
+                        "block";
+
+
+                    resultBox.innerHTML = `
+                        <h3>${data.result}</h3>
+
+                        <p>
+                            Survival Probability:
+                            ${(data.survival_probability * 100).toFixed(2)}%
+                        </p>
+                    `;
+
+                }
+
+                catch (error) {
+
+                    resultBox.style.display =
+                        "block";
+
+                    resultBox.innerHTML = `
+                        <p>
+                            Error: ${error.message}
+                        </p>
+                    `;
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+services:
+
+  api:
+    build: .
+    container_name: titanic-api
+
+    ports:
+      - "8000:10000"
+
+    environment:
+      PORT: 10000
+
+    restart: unless-stopped
