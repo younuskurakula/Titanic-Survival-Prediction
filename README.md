@@ -214,6 +214,8 @@ These results represent the current version of the project and may change after 
 
 The trained model is exposed through a **FastAPI REST API**.
 
+API Docs: https://titanic-survival-api-2285.onrender.com/docs
+
 ### API Endpoints
 
 #### Health Check
@@ -501,7 +503,8 @@ ATitanicSurvivalPrediction/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/younuskurakula/Titanic-Survival-Prediction.git
+git clone  https://github.com/younuskurakula/Titanic-Survival-Prediction.git
+
 ```
 
 ```bash
@@ -511,13 +514,13 @@ cd Titanic-Survival-Prediction
 ### 2. Create and activate environment
 
 ```bash
-python3 -m venv .venv
+python3 -m venv titanic
 ```
 
 macOS / Linux:
 
 ```bash
-source .venv/bin/activate
+source titanic/bin/activate
 ```
 
 ### 3. Install dependencies
@@ -622,4 +625,4 @@ Potential improvements include:
 
 **Younus Kurakula**
 
-[GitHub](https://github.com/younuskurakula) · [LinkedIn](https://www.linkedin.com/in/enus5three/)
+[GitHub](https://github.com/younuskurakula) · [LinkedIn](https://www.linkedin.com/in/enus5three/) · [Portfolio](https://enusportfolio.netlify.app)
